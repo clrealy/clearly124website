@@ -42,6 +42,30 @@ header.hero {
   padding: 72px 20px 40px;
 }
 
+.terminal-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 auto 28px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #060608;
+  border: 1px solid var(--border);
+  color: #6cff8f;
+  font-family: "Fira Code", "Consolas", monospace;
+  font-size: 0.9rem;
+  min-height: 1.4em;
+}
+
+.terminal-line .cursor {
+  color: #6cff8f;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
 .avatar {
   width: 88px;
   height: 88px;
