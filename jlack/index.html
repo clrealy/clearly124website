@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JLack</title>
+  <meta name="description" content="JLack — a lil programming language. Install it, download it, learn the keywords." />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <header class="hero">
+    <a class="back-link" href="../">&larr; clearly124</a>
+    <div class="avatar">JLa</div>
+    <h1>JLack</h1>
+    <p class="tagline">a lil programming language 🔥</p>
+
+    <div class="install-box">
+      <code id="install-cmd">curl -fsSL https://clearly124.com/jlack/install.sh | sh</code>
+      <button class="copy-btn" id="copy-btn" type="button">Copy</button>
+    </div>
+
+    <div class="dl-buttons">
+      <a class="dl-btn" href="jlack-windows.zip">Windows (.zip)</a>
+      <a class="dl-btn" href="jlack-linux-x64.tar.gz">Linux x64</a>
+      <a class="dl-btn" href="jlack-linux-arm64.tar.gz">Linux arm64</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="cheatsheet-section">
+      <h2>Keyword cheat sheet</h2>
+      <div class="cheatsheet">
+        <div class="kw"><code>yo</code><span>make variable</span></div>
+        <div class="kw"><code>say</code><span>print</span></div>
+        <div class="kw"><code>fr</code><span>if</span></div>
+        <div class="kw"><code>nah</code><span>else</span></div>
+        <div class="kw"><code>keep</code><span>while</span></div>
+        <div class="kw"><code>cook</code><span>function</span></div>
+        <div class="kw"><code>serve</code><span>return</span></div>
+        <div class="kw"><code>bet</code><span>true</span></div>
+        <div class="kw"><code>cap</code><span>false</span></div>
+        <div class="kw"><code>ghost</code><span>null</span></div>
+      </div>
+    </section>
+
+    <section class="example-section">
+      <h2>Example</h2>
+      <pre class="code-block"><span class="kw">yo</span> name = <span class="str">"JLack"</span>
+<span class="kw">say</span> <span class="str">"yo "</span> + name
+<span class="kw">cook</span> add(a, b) { <span class="kw">serve</span> a + b }
+<span class="kw">say</span> add(6, 7)</pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>.JLa is the file extension (Give us patch 7 brandon)</p>
+  </footer>
+
+  <script src="jlack.js"></script>
+</body>
+</html>
