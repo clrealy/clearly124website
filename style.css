@@ -211,8 +211,147 @@ footer {
   border-top: 1px solid var(--border);
 }
 
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  color: var(--text);
+}
+
+.install-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 auto 28px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #060608;
+  border: 1px solid var(--border);
+  max-width: 640px;
+}
+
+.install-box code {
+  color: #6cff8f;
+  font-family: "Fira Code", "Consolas", monospace;
+  font-size: 0.85rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.copy-btn {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.copy-btn:hover {
+  border-color: var(--accent);
+  background: var(--bg-2);
+}
+
+.dl-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dl-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124, 92, 255, 0.35);
+}
+
+.cheatsheet {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.cheatsheet .kw {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.cheatsheet code {
+  color: var(--accent-2);
+  font-family: "Fira Code", "Consolas", monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.cheatsheet span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.code-block {
+  background: #060608;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  overflow-x: auto;
+  font-family: "Fira Code", "Consolas", monospace;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: #e4e4f2;
+}
+
+.code-block .kw {
+  color: var(--accent-2);
+  font-weight: 700;
+}
+
+.code-block .str {
+  color: #6cff8f;
+}
+
 @media (max-width: 480px) {
   header.hero h1 {
     font-size: 2.1rem;
+  }
+
+  .install-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .install-box code {
+    white-space: normal;
+    word-break: break-all;
   }
 }
