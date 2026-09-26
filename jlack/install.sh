@@ -29,15 +29,36 @@ curl -fsSL "$BASE_URL/jlack-linux-$ARCH.tar.gz" -o "$TMP/jlack.tar.gz" || die "d
 tar -xzf "$TMP/jlack.tar.gz" -C "$TMP" || die "couldn't unpack it 💀"
 chmod +x "$TMP/jlack"
 
-# install to /usr/local/bin if we can, otherwise ~/.local/bin (no sudo needed)
-if [ -w /usr/local/bin ]; then
-  DEST="/usr/local/bin"; mv "$TMP/jlack" "$DEST/jlack"
-elif command -v sudo >/dev/null 2>&1 && [ -z "$JLACK_NO_SUDO" ]; then
-  DEST="/usr/local/bin"; say "🔑 need sudo to put it in $DEST"
-  sudo mv "$TMP/jlack" "$DEST/jlack"
+# pick where jlack goes: JLACK_DEST (used by `jlack upd`), else /usr/local/bin, else ~/.local/bin
+put() { # put <dir>
+  if [ -w "$1" ] || { [ ! -e "$1" ] && mkdir -p "$1" 2>/dev/null; }; then mv "$TMP/jlack" "$1/jlack"
+  elif command -v sudo >/dev/null 2>&1 && [ -z "$JLACK_NO_SUDO" ]; then say "🔑 need sudo to put it in $1"; sudo mv "$TMP/jlack" "$1/jlack"
+  else return 1; fi
+}
+if [ -n "$JLACK_DEST" ]; then
+  DEST="$JLACK_DEST"; put "$DEST" || die "can't write to $DEST"
+elif put /usr/local/bin; then
+  DEST="/usr/local/bin"
 else
   DEST="$HOME/.local/bin"; mkdir -p "$DEST"; mv "$TMP/jlack" "$DEST/jlack"
   case ":$PATH:" in *":$DEST:"*) ;; *) say "⚠️  add this to your ~/.bashrc:  export PATH=\"\$HOME/.local/bin:\$PATH\"" ;; esac
+fi
+
+# .JLa file icons 🎨 (per-user, no sudo)
+DATA="${XDG_DATA_HOME:-$HOME/.local/share}"
+if [ -f "$TMP/jlack-mime.xml" ]; then
+  mkdir -p "$DATA/mime/packages"
+  cp "$TMP/jlack-mime.xml" "$DATA/mime/packages/jlack.xml"
+  for s in 16 24 32 48 64 128 256 512; do
+    if [ -f "$TMP/icons/jlack-$s.png" ]; then
+      mkdir -p "$DATA/icons/hicolor/${s}x${s}/mimetypes"
+      cp "$TMP/icons/jlack-$s.png" "$DATA/icons/hicolor/${s}x${s}/mimetypes/text-x-jlack.png"
+    fi
+  done
+  command -v update-mime-database >/dev/null 2>&1 && update-mime-database "$DATA/mime" >/dev/null 2>&1 || true
+  command -v gtk-update-icon-cache >/dev/null 2>&1 && gtk-update-icon-cache -f -t "$DATA/icons/hicolor" >/dev/null 2>&1 || true
+  command -v xdg-icon-resource >/dev/null 2>&1 && xdg-icon-resource forceupdate >/dev/null 2>&1 || true
+  say "🎨 .JLa files got their custom icon (might need to reopen your file manager)"
 fi
 
 say "✅ JLack installed to $DEST/jlack"
